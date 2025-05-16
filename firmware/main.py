@@ -11,12 +11,10 @@ class Font:
     def get_ch(self, ch): return get_ch(ch)
 from utime import sleep_ms, ticks_ms, ticks_diff
 
-# OLED 初始化（GPIO12: SDA, GPIO13: SCL）
 i2c = I2C(0, scl=Pin(13), sda=Pin(12))
 oled = ssd1306.SSD1306_I2C(128, 64, i2c, addr=0x3D)
 wri = Writer(oled, Font())
 
-# 引脚定义
 STATUS_PIN = Pin(14, Pin.IN)
 OR_PIN = Pin(16, Pin.IN)
 POL_PIN = Pin(15, Pin.IN)
@@ -116,27 +114,25 @@ def switch_mode():
 def update_oled(mode_text, voltage=None, current=None):
     oled.fill(0)
 
-    # 居中模式文本
     mode_x = (128 - wri.stringlen(mode_text)) // 2
     Writer.set_textpos(oled, 0, 0)
-    # 获取字体高度和宽度后绘制反转背景
     font_h = wri.height
     text_w = wri.stringlen(mode_text)
     bg_x = (128 - text_w) // 2
-    oled.fill_rect(bg_x - 4, 0, text_w + 10, font_h, 4)  # 白底
+    oled.fill_rect(bg_x - 4, 0, text_w + 10, font_h, 4)
     Writer.set_textpos(oled, 0, bg_x )
     wri.printstring(mode_text, invert=True)
 
     if voltage is not None:
         v_text = "{:.3f} V".format(voltage)
         v_x = (128 - wri.stringlen(v_text)) // 2
-        Writer.set_textpos(oled, 26, v_x)  # 原为16，向下移8px
+        Writer.set_textpos(oled, 26, v_x)  
         wri.printstring(v_text)
 
     if current is not None:
         c_text = "{:.2f} mA".format(current * 1000)
         c_x = (128 - wri.stringlen(c_text)) // 2
-        Writer.set_textpos(oled, 46, c_x)  # 原为32，向下移8px
+        Writer.set_textpos(oled, 46, c_x)  
         wri.printstring(c_text)
 
     oled.show()
