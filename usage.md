@@ -80,6 +80,12 @@ This project uses a MicroPython-capable RP2040 board (e.g. Raspberry Pi Pico) to
 
 ---
 
+## 📊 Measurement Performance
+
+* **Voltage Range**: 0 – 24V DC (via external resistor divider)
+* **Voltage Resolution**: \~0.01V (with 12-bit ADC and proper scaling)
+* **Current Resolution**: \~0.1mA (based on amplifier gain and VREF)
+
 ## 📌 Notes
 
 * Voltage input should stay within ±0.01V.
