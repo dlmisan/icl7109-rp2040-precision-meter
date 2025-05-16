@@ -9,7 +9,7 @@ This project uses a MicroPython-capable RP2040 board (e.g. Raspberry Pi Pico) to
 | Component    | Description                                |
 | ------------ | ----------------------------------------   |
 | RP2040 board | Raspberry Pi Pico (MicroPython firmware)   |
-| ICL7109      | ±0.1V 12-bit bipolar ADC (parallel output) |
+| ICL7109      | 0.01V 12-bit bipolar ADC (parallel output) |
 | MC14052      | Analog multiplexer                         |
 | SSD1306 OLED | 128x64 I2C display (address: `0x3D`)       |
 | Button       | Used for mode switching (GPIO3)            |
@@ -82,7 +82,7 @@ This project uses a MicroPython-capable RP2040 board (e.g. Raspberry Pi Pico) to
 
 ## 📌 Notes
 
-* Voltage input should stay within ±2V.
+* Voltage input should stay within ±0.01V.
 * The project uses manual white background + black text for better visibility.
 * You can extend this to add WiFi (e.g. Pico W), SD logging, or graphical plots.
 
