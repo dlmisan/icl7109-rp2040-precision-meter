@@ -1,42 +1,63 @@
-# ICL7109 + RP2040 精密电压电流测量
+# 🔬 Precision Analog Measurement with ICL7109 on RP2040 + OLED
 
-这是一个基于 ICL7109 高精度 ADC 与 RP2040 微控制器的电压/电流测量仪项目。具有 OLED 显示和按键切换功能，适合用于精密测量、教学实验或嵌入式测控系统。
+This is a MicroPython-based project that measures high-precision analog voltage and current using the **ICL7109 ADC**, controlled by an **RP2040-based board (Raspberry Pi Pico)**, and displays the result in real-time on a **128x64 OLED display**.
 
-## ✨ 特性
+---
 
-- 使用 ICL7109 进行 ±0.1V 高精度模拟信号采集
-- RP2040 控制数据读取与通道切换
-- OLED 实时显示电压、电流值
-- 多路输入支持（通过 MC14052）
-- 低功耗设计，适合电池供电
+## 📸 Preview
 
-## 🧩 项目结构
+> ![oled example](doc/oled_display.jpg) 
 
-- `/hardware`：KiCad设计、原理图、PCB、Gerber
-- `/firmware`：MicroPython控制脚本（支持Thonny）
-- `/docs`：图片、使用说明、调试信息
+---
 
-## 🛠️ 硬件连接（示意）
+## 🚀 Features
 
-| 元件 | 引脚说明 |
-|------|----------|
-| ICL7109 | 直接采集模拟输入，提供并口输出 |
-| RP2040 | 读取 ICL7109 数据，通过 GPIO 控制通道切换 |
-| OLED (I2C) | 显示测量值 |
-| 按键 | 切换通道模式 |
-| LED | 指示当前状态 |
+- 🎯 **High-resolution bipolar ADC reading** with ICL7109
+- 🔀 **Auto & manual switching** between voltage/current and external channels via MC14052
+- 📺 **OLED display with large font** using `writer.py` + `font10.py`
+- 🔘 **Physical button control** to toggle between display modes
+- 💡 **LED mode indicator** (ON = manual mode)
+- 📐 **Voltage & current displayed simultaneously**
+- 🧠 **Runs on RP2040-based board (Raspberry Pi Pico)**
 
-## 🔧 使用方法
+---
 
-1. 烧录 `firmware/` 下的脚本到 Raspberry Pi Pico（建议 MicroPython 环境）
-2. 上电后OLED显示当前测量值
-3. 短按按键切换电压/电流模式
+## 🧰 Hardware Required
 
-## 📸 实物图
+| Component            | Description                          |
+|---------------------|--------------------------------------|
+| 🎛 ICL7109           | ±2V 12-bit analog-to-digital converter |
+| 🔘 MC14052           | Analog multiplexer (2:4)             |
+| 📺 SSD1306 OLED      | 128x64 I2C screen (address `0x3D`)   |
+| 🧠 RP2040 MCU        | Raspberry Pi Pico / Pico W (MicroPython) |
+| 🔘 Tactile button    | Used for display mode toggle         |
+| 💡 LED + resistor    | Indicates manual/auto mode           |
+| 📐 Passive components| Pull-ups, dividers as needed         |
 
-（插入一张项目实物图片）
+---
 
-## 📜 开源协议
+## 🧠 MCU Wiring (RP2040 GPIO)
 
-本项目采用 MIT/CERN-OHL-S v2 开源许可协议，欢迎学习、复刻、改进和发布！
+| Function          | GPIO | Notes                          |
+|-------------------|------|--------------------------------|
+| SDA (OLED)        | 12   | I2C0 SDA                       |
+| SCL (OLED)        | 13   | I2C0 SCL                       |
+| ICL7109 STATUS    | 14   | Wait for data ready            |
+| ICL7109 POL       | 15   | Sign bit (1=positive, 0=negative) |
+| ICL7109 OR        | 16   | Over-range detection           |
+| MC14052 A/B       | 10/11| Select Y0/Y1/Y2/Y3             |
+| Button Input      | 3    | Low-active                     |
+| Status LED        | 2    | Manual/auto indicator          |
+| ICL7109 Data[0:11]| GPIO17 ~ GPIO28 | Reads ADC parallel output |
 
+---
+
+## 🖥️ OLED Display Layout
+
+```text
++-------------------------------+
+|        [  AUTO  ] (inverted) |
+|                               |
+|         +1.234 V              |
+|         +56.78 mA             |
++-------------------------------+
