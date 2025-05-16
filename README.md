@@ -6,7 +6,7 @@ This is a MicroPython-based project that measures high-precision analog voltage 
 
 ## 📸 Preview
 
-> ![oled example](doc/oled_display.jpg) 
+> ![oled example](hardware/ICL7109.png) 
 
 ---
 
