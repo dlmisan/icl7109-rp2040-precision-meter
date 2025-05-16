@@ -19,7 +19,15 @@ This is a MicroPython-based project that measures high-precision analog voltage 
 - 🔘 **Physical button control** to toggle between display modes
 - 💡 **LED mode indicator** (ON = manual mode)
 - 📐 **Voltage & current displayed simultaneously**
-- 🧠 **Runs on RP2040-based board (Raspberry Pi Pico)**
+- 🧠 **Runs on RP2040-based board**
+
+---
+
+## 📊 Measurement Performance
+
+* **Voltage Range**: 0 – 24V DC (via external resistor divider)
+* **Voltage Resolution**: \~0.01V (with 12-bit ADC and proper scaling)
+* **Current Resolution**: \~0.1mA (based on amplifier gain and VREF)
 
 ---
 
