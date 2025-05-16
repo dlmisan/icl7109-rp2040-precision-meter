@@ -27,7 +27,7 @@ This is a MicroPython-based project that measures high-precision analog voltage 
 
 | Component            | Description                          |
 |---------------------|--------------------------------------|
-| 🎛 ICL7109           | ±2V 12-bit analog-to-digital converter |
+| 🎛 ICL7109           | ±0.01V 12-bit analog-to-digital converter |
 | 🔘 MC14052           | Analog multiplexer (2:4)             |
 | 📺 SSD1306 OLED      | 128x64 I2C screen (address `0x3D`)   |
 | 🧠 RP2040 MCU        | Raspberry Pi Pico / Pico W (MicroPython) |
